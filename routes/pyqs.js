@@ -1,6 +1,6 @@
 
 const express = require('express');
-const PYQ = require('../models/pyq');
+const PYQ = require('../models/PYQ');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
