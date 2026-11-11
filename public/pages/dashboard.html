@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard | DBRAU Engineering Notes</title>
+  <link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/variables.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/student-auth.css">
+
+<script src="/js/dashboard.js" defer></script>
+<script src="/js/layout.js" defer></script>
+</head>
+<body class="auth-body">
+
+<div id="header-placeholder"></div>
+
+<main class="dashboard-container">
+
+  <section class="dashboard-welcome">
+    <h1>Welcome, <span id="studentName">Student</span>!</h1>
+    <p>Your DBRAU Engineering Notes student dashboard.</p>
+  </section>
+
+  <section class="dashboard-grid">
+
+    <a class="dashboard-tile" href="/pages/notes.html">
+      <div class="tile-icon">📚</div>
+      <h3>Study Notes</h3>
+      <p>Explore your B.Tech subject notes.</p>
+    </a>
+
+    <a class="dashboard-tile" href="/pages/pyqs.html">
+      <div class="tile-icon">📄</div>
+      <h3>Previous Year Papers</h3>
+      <p>Practice with previous year questions.</p>
+    </a>
+
+    <a class="dashboard-tile" href="/pages/branches.html">
+      <div class="tile-icon">🎓</div>
+      <h3>Engineering Branches</h3>
+      <p>Explore available engineering branches.</p>
+    </a>
+
+  </section>
+
+  <section class="profile-card" id="myProfile" hidden>
+    <h2>My Student Profile</h2>
+
+    <div class="profile-details">
+      <div class="profile-item">
+        <small>Full Name</small>
+        <strong id="profileName">Loading...</strong>
+      </div>
+
+      <div class="profile-item">
+        <small>Roll Number</small>
+        <strong id="profileRoll">Loading...</strong>
+      </div>
+
+      <div class="profile-item">
+        <small>Email Address</small>
+        <strong id="profileEmail">Loading...</strong>
+      </div>
+
+      <div class="profile-item">
+        <small>Branch</small>
+        <strong id="profileBranch">Loading...</strong>
+      </div>
+
+      <div class="profile-item">
+        <small>B.Tech Year</small>
+        <strong id="profileYear">Loading...</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard-notes">
+    <h2>Recently Added Notes</h2>
+    <div id="recentNotes">
+      <p>Loading notes...</p>
+    </div>
+    <p>
+      <a href="/pages/notes.html">View all notes →</a>
+    </p>
+  </section>
+
+</main>
+
+<div id="footer-placeholder"></div>
+
+</body>
+</html>

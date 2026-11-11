@@ -1,0 +1,357 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Engineering Notes | DBRAU Engineering Notes</title>
+
+  <meta name="description"
+    content="Browse B.Tech Engineering Notes by branch, year, semester and subject.">
+
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <script src="/js/notes.js" defer></script>
+  <script src="/js/layout.js" defer></script>
+
+  <style>
+    .notes-page {
+      padding-bottom: 50px;
+    }
+
+    .notes-hero {
+      padding: 45px 20px;
+      text-align: center;
+    }
+
+    .notes-hero h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      margin-bottom: 12px;
+    }
+
+    .notes-hero p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .filter-panel {
+      background: var(--surface);
+      border: 1px solid rgba(150, 150, 150, 0.2);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 20px 0 30px;
+    }
+
+    .filter-panel h2 {
+      margin-bottom: 8px;
+    }
+
+    .filter-description {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .filter-group label {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .filter-group input,
+    .filter-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(150, 150, 150, 0.4);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font: inherit;
+      min-width: 0;
+    }
+
+    .filter-group input:focus,
+    .filter-group select:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .filter-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .filter-actions button {
+      padding: 12px 22px;
+      border-radius: 8px;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 600;
+    }
+
+    #applyFilters {
+      background: var(--accent);
+      color: #111;
+    }
+
+    #clearSearch {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(150, 150, 150, 0.4);
+    }
+
+    .results-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 25px 0 16px;
+    }
+
+    #searchMessage {
+      color: var(--muted);
+      margin: 12px 0;
+    }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+      margin: 20px 0;
+    }
+
+    .note-card {
+      background: var(--surface);
+      border: 1px solid rgba(150, 150, 150, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      overflow-wrap: anywhere;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .note-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .note-card h3 {
+      font-size: 19px;
+      margin-bottom: 14px;
+    }
+
+    .note-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 12px;
+    }
+
+    .note-meta span {
+      background: var(--bg);
+      border: 1px solid rgba(150, 150, 150, 0.2);
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .note-description {
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    .note-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .note-actions a {
+      display: inline-block;
+      padding: 9px 14px;
+      border-radius: 7px;
+      background: var(--accent);
+      color: #111;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .note-actions .download-link {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--accent);
+    }
+
+    .no-file {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .filter-panel {
+        padding: 16px;
+      }
+
+      .filter-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-actions {
+        flex-direction: column;
+      }
+
+      .filter-actions button {
+        width: 100%;
+      }
+
+      .notes-hero {
+        padding: 30px 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+ <div id="header-placeholder"></div>
+
+  <main class="container notes-page">
+
+    <section class="notes-hero">
+      <h1>Engineering Notes</h1>
+      <p>
+        Find your B.Tech study material by branch, year,
+        semester and subject.
+      </p>
+    </section>
+
+    <section class="filter-panel">
+
+      <h2>Find Your Notes</h2>
+
+      <p class="filter-description">
+        Search and filter your Engineering study material.
+      </p>
+
+      <form id="notesSearchForm">
+
+        <div class="filter-group" style="margin-bottom: 18px;">
+          <label for="notesSearch">Search Notes</label>
+
+          <input
+            type="search"
+            id="notesSearch"
+            name="q"
+            placeholder="Search subject, topic or keyword..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-grid">
+
+          <div class="filter-group">
+            <label for="branchFilter">Select Branch</label>
+
+            <select id="branchFilter" name="branch">
+              <option value="">All Branches</option>
+              <option value="CSE">Computer Science (CSE)</option>
+              <option value="IT">Information Technology (IT)</option>
+              <option value="ECE">Electronics (ECE)</option>
+              <option value="ME">Mechanical (ME)</option>
+              <option value="CE">Civil (CE)</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="yearFilter">Select Year</label>
+
+            <select id="yearFilter" name="year">
+              <option value="">All Years</option>
+              <option value="1">1st Year</option>
+              <option value="2">2nd Year</option>
+              <option value="3">3rd Year</option>
+              <option value="4">4th Year</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="semesterFilter">Select Semester</label>
+
+            <select id="semesterFilter" name="semester">
+              <option value="">All Semesters</option>
+              <option value="1">Semester 1</option>
+              <option value="2">Semester 2</option>
+              <option value="3">Semester 3</option>
+              <option value="4">Semester 4</option>
+              <option value="5">Semester 5</option>
+              <option value="6">Semester 6</option>
+              <option value="7">Semester 7</option>
+              <option value="8">Semester 8</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="subjectFilter">Select Subject</label>
+
+            <select id="subjectFilter" name="subject">
+              <option value="">All Subjects</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="filter-actions">
+
+          <button type="submit" id="applyFilters">
+            Apply Filters
+          </button>
+
+          <button type="button" id="clearSearch">
+            Reset Filters
+          </button>
+
+        </div>
+
+      </form>
+    </section>
+
+    <section aria-labelledby="resultsHeading">
+
+      <div class="results-heading">
+        <h2 id="resultsHeading">Available Engineering Notes</h2>
+      </div>
+
+      <p id="searchMessage" role="status" aria-live="polite">
+        Loading notes...
+      </p>
+
+      <div id="notesResults" class="notes-grid"></div>
+
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+</body>
+</html>

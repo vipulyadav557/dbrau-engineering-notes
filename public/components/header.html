@@ -1,0 +1,57 @@
+
+<header class="site-header">
+  <div class="container navbar">
+
+    <!-- Website Logo and Name -->
+    <a class="brand" href="/" aria-label="DBRAU Engineering Notes Home">
+      <img src="/images/dbrau-logo.png" alt="DBRAU logo">
+      <span>DBRAU Engineering Notes</span>
+    </a>
+
+    <!-- Mobile Menu Button -->
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-expanded="false"
+      aria-controls="navLinks"
+      aria-label="Toggle navigation">
+      ☰ Menu
+    </button>
+
+    <!-- Navigation Links -->
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="/" data-nav="home">Home</a>
+      <a href="/pages/notes.html" data-nav="notes">Notes</a>
+      <a href="/pages/pyqs.html" data-nav="pyqs">PYQs</a>
+      <a href="/pages/branches.html" data-nav="branches">Branches</a>
+      <a href="/pages/about.html" data-nav="about">About</a>
+
+      <!-- Student Login (shown when logged out) -->
+      
+<a href="/pages/login.html" class="button" id="studentLoginLink">
+  Student Login
+</a>
+
+<div class="student-account" id="studentAccount" hidden>
+  <button
+    type="button"
+    class="student-account-toggle"
+    id="studentAccountToggle"
+    aria-expanded="false"
+    aria-controls="studentAccountDropdown">
+
+    <span class="student-avatar" id="studentAvatar">S</span>
+    <span id="studentHeaderName">Student</span>
+    <span>▾</span>
+  </button>
+
+  <div class="student-account-dropdown" id="studentAccountDropdown" hidden>
+    <a href="/pages/dashboard.html">My Dashboard</a>
+    <a href="/pages/dashboard.html#myProfile">👤 My Profile</a>
+    <button type="button" id="studentLogout">↪ Logout</button>
+  </div>
+</div>
+
+    </nav>
+  </div>
+</header>

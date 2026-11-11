@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Previous Year Question Papers | DBRAU Engineering Notes</title>
+
+  <meta name="description"
+    content="Search and download DBRAU B.Tech previous year question papers.">
+
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <script src="/js/layout.js" defer></script>
+  <script src="/js/pyqs.js" defer></script>
+
+  <style>
+    .pyq-section {
+      padding: 35px 0 60px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .pyq-hero {
+      text-align: center;
+      padding: 35px 15px;
+    }
+
+    .pyq-hero h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      margin-bottom: 12px;
+    }
+
+    .pyq-hero p {
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+    .pyq-search {
+      max-width: 650px;
+      margin: 25px auto;
+      display: flex;
+      gap: 10px;
+    }
+
+    .pyq-search input {
+      width: 100%;
+      padding: 15px 18px;
+      border: 1px solid var(--muted);
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 16px;
+      outline: none;
+    }
+
+    .pyq-search input:focus {
+      border-color: var(--accent);
+    }
+
+    .pyq-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin: 25px 0 18px;
+      flex-wrap: wrap;
+    }
+
+    .pyq-info p {
+      color: var(--muted);
+    }
+
+    .pyq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .pyq-card {
+      background: var(--surface);
+      border: 1px solid rgba(128,128,128,0.2);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pyq-card h3 {
+      font-size: 19px;
+      line-height: 1.4;
+    }
+
+    .pyq-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pyq-tag {
+      font-size: 12px;
+      padding: 5px 9px;
+      border-radius: 20px;
+      background: rgba(201,169,110,0.13);
+      color: var(--accent);
+    }
+
+    .pyq-description {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .pyq-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 8px;
+    }
+
+    .pyq-actions a {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .pyq-view {
+      background: var(--accent);
+      color: #17181c;
+    }
+
+    .pyq-download {
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .pyq-message {
+      text-align: center;
+      padding: 45px 15px;
+      color: var(--muted);
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 500px) {
+      .pyq-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <main class="container pyq-section">
+
+    <section class="pyq-hero">
+      <h1>Previous Year Question Papers</h1>
+
+      <p>
+        Find and download B.Tech previous year question papers
+        from all years and semesters.
+      </p>
+
+      <div class="pyq-search">
+        <input
+          type="search"
+          id="pyq-search-input"
+          placeholder="Search by subject, year, semester or keyword..."
+          autocomplete="off"
+          aria-label="Search previous year question papers"
+        >
+      </div>
+    </section>
+
+    <section aria-label="Question papers">
+
+      <div class="pyq-info">
+        <h2>All Question Papers</h2>
+        <p id="pyq-count">Loading papers...</p>
+      </div>
+
+      <div id="pyq-list" class="pyq-grid">
+        <div class="pyq-message">Loading question papers...</div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+</body>
+</html>

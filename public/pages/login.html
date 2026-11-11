@@ -1,0 +1,81 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Student Login | DBRAU Engineering Notes</title>
+  <meta name="description" content="Student login portal for DBRAU Engineering Notes.">
+
+  <!-- Common Website CSS -->
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <!-- Student Authentication CSS -->
+  <link rel="stylesheet" href="/css/student-auth.css">
+
+  <!-- JavaScript -->
+  <script src="/js/login.js" defer></script>
+  <script src="/js/layout.js" defer></script>
+</head>
+
+<body class="auth-body">
+
+<div id="header-placeholder"></div>
+
+<main class="auth-container">
+  <section class="auth-card">
+    <div class="auth-icon">🎓</div>
+
+    <h1>Welcome Back!</h1>
+    <p class="auth-subtitle">
+      Login to your student account and access your engineering study resources.
+    </p>
+
+    <div id="loginMessage" class="auth-message" role="alert"></div>
+
+    <form id="loginForm" class="auth-form">
+      <div>
+        <label for="identifier">Email or Roll Number</label>
+        <input
+          type="text"
+          id="identifier"
+          name="identifier"
+          placeholder="Enter your email or roll number"
+          autocomplete="username"
+          maxlength="150"
+          required
+        >
+      </div>
+
+      <div>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required
+        >
+      </div>
+
+      <button type="submit" class="auth-button" id="loginButton">
+        Sign In
+      </button>
+    </form>
+
+    <div class="auth-bottom">
+      New student?
+      <a href="/pages/register.html">Create an account</a>
+    </div>
+  </section>
+</main>
+
+<div id="footer-placeholder"></div>
+
+</body>
+</html>

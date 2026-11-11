@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Student Registration | DBRAU Engineering Notes</title>
+
+  <!-- Common CSS -->
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <!-- Registration Page CSS -->
+  <link rel="stylesheet" href="/css/student-auth.css">
+
+  <!-- JavaScript -->
+  <script src="/js/register.js" defer></script>
+  <script src="/js/layout.js" defer></script>
+</head>
+
+<body class="auth-body">
+
+<div id="header-placeholder"></div>
+
+<main class="auth-container">
+  <section class="auth-card wide">
+    <div class="auth-icon">📝</div>
+
+    <h1>Create Student Account</h1>
+    <p class="auth-subtitle">
+      Register yourself to access DBRAU Engineering Notes.
+    </p>
+
+    <div id="registerMessage" class="auth-message" role="alert"></div>
+
+    <form id="registerForm" class="auth-form">
+
+      <div>
+        <label for="fullName">Full Name</label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          placeholder="Enter your full name"
+          minlength="2"
+          maxlength="100"
+          autocomplete="name"
+          required
+        >
+      </div>
+
+      <div class="auth-grid">
+        <div>
+          <label for="rollNumber">Roll Number</label>
+          <input
+            type="text"
+            id="rollNumber"
+            name="rollNumber"
+            placeholder="Enter roll number"
+            maxlength="30"
+            required
+          >
+        </div>
+
+        <div>
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter email"
+            maxlength="150"
+            autocomplete="email"
+            required
+          >
+        </div>
+      </div>
+
+      <div class="auth-grid">
+        <div>
+          <label for="branch">Branch</label>
+          <select id="branch" name="branch" required>
+            <option value="">Select Branch</option>
+            <option value="CSE">Computer Science (CSE)</option>
+            <option value="IT">Information Technology (IT)</option>
+            <option value="ECE">Electronics (ECE)</option>
+            <option value="ME">Mechanical (ME)</option>
+            <option value="CE">Civil (CE)</option>
+            <option value="EE">Electrical (EE)</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="year">B.Tech Year</label>
+          <select id="year" name="year" required>
+            <option value="">Select Year</option>
+            <option value="1">1st Year</option>
+            <option value="2">2nd Year</option>
+            <option value="3">3rd Year</option>
+            <option value="4">4th Year</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="auth-grid">
+        <div>
+          <label for="password">Create Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Minimum 8 characters"
+            minlength="8"
+            maxlength="72"
+            autocomplete="new-password"
+            required
+          >
+        </div>
+
+        <div>
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Enter password again"
+            minlength="8"
+            maxlength="72"
+            autocomplete="new-password"
+            required
+          >
+        </div>
+      </div>
+
+      <p class="password-help">
+        Use a unique password that you do not use on other websites.
+      </p>
+
+      <button type="submit" class="auth-button" id="registerButton">
+        Create Account
+      </button>
+
+    </form>
+
+    <div class="auth-bottom">
+      Already registered?
+      <a href="/pages/login.html">Login here</a>
+    </div>
+  </section>
+</main>
+
+<div id="footer-placeholder"></div>
+
+</body>
+</html>

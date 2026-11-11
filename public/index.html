@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="DBRAU Engineering Notes: Find B.Tech notes, semester-wise study materials and previous year question papers.">
+  <title>DBRAU Engineering Notes | Study Smarter</title>
+
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/main.js" defer></script>
+  <script src="/js/layout.js" defer></script>
+
+  <style>
+    /* Homepage-only styling. Existing shared header/footer files remain untouched. */
+    .home-hero { padding: clamp(3rem, 7vw, 6rem) 0; background: radial-gradient(circle at 85% 20%, rgba(201,169,110,.20), transparent 30%), linear-gradient(135deg,#111827,#1f2937); color:#f9fafb; }
+    .home-hero-grid { display:grid; grid-template-columns:1.3fr .7fr; gap:2rem; align-items:center; }
+    .home-hero h1 { font-size:clamp(2.2rem,5vw,4rem); line-height:1.08; margin:.9rem 0 1rem; }
+    .home-hero p { color:#d1d5db; max-width:620px; line-height:1.7; }
+    .home-hero .tag { display:inline-block; border:1px solid rgba(255,255,255,.22); border-radius:999px; padding:.45rem .85rem; color:#f3d9a6; }
+    .home-hero-visual { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:24px; padding:2rem; text-align:center; backdrop-filter:blur(8px); }
+    .home-hero-visual img { width:min(180px,60%); aspect-ratio:1; object-fit:contain; margin:0 auto 1rem; }
+    .home-search { display:flex; gap:.65rem; margin-top:1.5rem; max-width:620px; }
+    .home-search input { flex:1; min-width:0; border-radius:12px; padding:.9rem 1rem; border:1px solid #d1d5db; }
+    .home-actions { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.2rem; }
+    .home-section { padding:clamp(2.5rem,5vw,4.5rem) 0; }
+    .home-section-heading { text-align:center; margin-bottom:.6rem; }
+    .home-section-description { text-align:center; color:#6b7280; max-width:680px; margin:0 auto 2rem; }
+    .year-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem; }
+    .year-card { border:1px solid #e5e7eb; border-radius:18px; background:#fff; overflow:hidden; box-shadow:0 8px 25px rgba(17,24,39,.06); }
+    .year-card > summary { list-style:none; cursor:pointer; padding:1.35rem; min-height:145px; display:flex; flex-direction:column; justify-content:center; gap:.45rem; position:relative; }
+    .year-card > summary::-webkit-details-marker,.semester-card > summary::-webkit-details-marker,.branch-choice > summary::-webkit-details-marker { display:none; }
+    .year-card > summary:after { content:"＋"; position:absolute; right:1.1rem; top:1rem; color:#9ca3af; font-size:1.2rem; }
+    .year-card[open] > summary:after { content:"−"; }
+    .year-number { color:#b48a45; font-size:.8rem; font-weight:800; letter-spacing:.16em; }
+    .year-card h3 { font-size:1.25rem; margin:0; color:#111827; }
+    .year-card summary p { color:#6b7280; margin:0; font-size:.92rem; }
+    .year-content { border-top:1px solid #eee; padding:1rem; background:#fafafa; }
+    .semester-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; }
+    .semester-card { border:1px solid #e5e7eb; border-radius:12px; background:white; padding:.9rem; }
+    .semester-card > summary { cursor:pointer; list-style:none; font-weight:700; color:#1f2937; }
+    .semester-card[open] { grid-column:1/-1; border-color:#c9a96e; }
+    .semester-card p { color:#6b7280; font-size:.82rem; margin:.3rem 0 0; }
+    .branch-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem; margin-top:.85rem; }
+    .branch-choice { border:1px solid #e5e7eb; border-radius:11px; background:#fff; padding:.75rem; }
+    .branch-choice > summary { cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; gap:.5rem; }
+    .branch-code { font-weight:800; color:#111827; }
+    .branch-name { display:block; color:#6b7280; font-size:.75rem; margin-top:.15rem; }
+    .branch-links { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.75rem; }
+    .branch-links a { display:inline-flex; text-decoration:none; border-radius:8px; padding:.5rem .7rem; font-size:.85rem; font-weight:700; background:#111827; color:#fff; }
+    .branch-links a.pyq-link { background:#f3eadb; color:#684d23; }
+    .resource-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; max-width:850px; margin:auto; }
+    .resource-card { padding:1.5rem; border:1px solid #e5e7eb; border-radius:18px; background:#fff; }
+    .resource-card .card-icon { font-size:2rem; margin-bottom:.7rem; }
+    .resource-card p { color:#6b7280; }
+    .home-notice { margin-top:1.5rem; padding:1rem 1.2rem; border-radius:12px; background:#f9fafb; color:#6b7280; font-size:.9rem; }
+    @media(max-width:850px) { .year-grid{grid-template-columns:repeat(2,minmax(0,1fr));} .home-hero-grid{grid-template-columns:1fr;} .home-hero-visual{max-width:420px;margin:auto;width:100%;} }
+    @media(max-width:520px) { .year-grid{grid-template-columns:1fr;} .home-search{flex-direction:column;} .home-search .button{width:100%;} .resource-grid{grid-template-columns:1fr;} .branch-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body class="home-page">
+
+  <!-- SAME SHARED HEADER: layout.js loads the existing header here -->
+  <div id="header-placeholder"></div>
+
+  <main>
+    <section class="home-hero">
+      <div class="container home-hero-grid">
+        <div>
+          <span class="tag">Your Study Companion</span>
+          <h1>Your Engineering Journey, Simplified.</h1>
+          <p>Find semester-wise notes, previous year question papers and study resources in one place. Choose your year, semester and branch to get started.</p>
+
+          <form class="search-form home-search" id="globalSearch" role="search">
+            <input type="search" id="searchInput" placeholder="Search subjects, notes or PYQs..." aria-label="Search study materials">
+            <button class="button" type="submit">Search</button>
+          </form>
+
+          <div class="home-actions">
+            <a class="button" href="/pages/notes.html">Explore Notes</a>
+            <a class="button button-secondary" href="/pages/pyqs.html">Browse PYQs</a>
+          </div>
+        </div>
+        <div class="home-hero-visual">
+          <img src="/images/dbrau-logo.png" alt="DBRAU university emblem">
+          <h2>Learn. Prepare. Succeed.</h2>
+          <p>Organized engineering study resources for students.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section" id="branchResources">
+      <div class="container">
+        <h2 class="section-heading home-section-heading">Explore Engineering Resources</h2>
+        <p class="section-description home-section-description">पहले अपना Year चुनें, फिर Semester और Branch चुनकर Notes या PYQs खोलें।</p>
+
+        <div class="year-grid">
+          <!-- YEAR 1 -->
+          <details class="year-card">
+            <summary><span class="year-number">YEAR 01</span><h3>1st Year</h3><p>Semester 1 &amp; 2</p></summary>
+            <div class="year-content"><div class="semester-grid">
+              <details class="semester-card"><summary>1st Semester</summary><p>Choose your branch</p><div class="branch-grid">
+                <div class="branch-choice"><div><span class="branch-code">CSE</span><span class="branch-name">Computer Science</span></div><div class="branch-links"><a href="/notes?branch=CSE&amp;year=1&amp;semester=1">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CSE&amp;year=1&amp;semester=1">PYQs</a></div></div>
+                <div class="branch-choice"><div><span class="branch-code">IT</span><span class="branch-name">Information Technology</span></div><div class="branch-links"><a href="/notes?branch=IT&amp;year=1&amp;semester=1">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=IT&amp;year=1&amp;semester=1">PYQs</a></div></div>
+                <div class="branch-choice"><div><span class="branch-code">ECE</span><span class="branch-name">Electronics &amp; Communication</span></div><div class="branch-links"><a href="/notes?branch=ECE&amp;year=1&amp;semester=1">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ECE&amp;year=1&amp;semester=1">PYQs</a></div></div>
+                <div class="branch-choice"><div><span class="branch-code">EE</span><span class="branch-name">Electrical Engineering</span></div><div class="branch-links"><a href="/notes?branch=EE&amp;year=1&amp;semester=1">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=EE&amp;year=1&amp;semester=1">PYQs</a></div></div>
+                <div class="branch-choice"><div><span class="branch-code">ME</span><span class="branch-name">Mechanical Engineering</span></div><div class="branch-links"><a href="/notes?branch=ME&amp;year=1&amp;semester=1">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ME&amp;year=1&amp;semester=1">PYQs</a></div></div>
+                <div class="branch-choice"><div><span class="branch-code">CE</span><span class="branch-name">Civil Engineering</span></div><div class="branch-links"><a href="/notes?branch=CE&amp;year=1&amp;semester=1">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CE&amp;year=1&amp;semester=1">PYQs</a></div></div>
+              </div></details>
+              <details class="semester-card"><summary>2nd Semester</summary><p>Choose your branch</p><div class="branch-grid">
+                <div class="branch-choice"><span class="branch-code">CSE</span><div class="branch-links"><a href="/notes?branch=CSE&amp;year=1&amp;semester=2">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CSE&amp;year=1&amp;semester=2">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">IT</span><div class="branch-links"><a href="/notes?branch=IT&amp;year=1&amp;semester=2">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=IT&amp;year=1&amp;semester=2">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ECE</span><div class="branch-links"><a href="/notes?branch=ECE&amp;year=1&amp;semester=2">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ECE&amp;year=1&amp;semester=2">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">EE</span><div class="branch-links"><a href="/notes?branch=EE&amp;year=1&amp;semester=2">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=EE&amp;year=1&amp;semester=2">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ME</span><div class="branch-links"><a href="/notes?branch=ME&amp;year=1&amp;semester=2">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ME&amp;year=1&amp;semester=2">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">CE</span><div class="branch-links"><a href="/notes?branch=CE&amp;year=1&amp;semester=2">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CE&amp;year=1&amp;semester=2">PYQs</a></div></div>
+              </div></details>
+            </div></div>
+          </details>
+
+          <!-- YEAR 2 -->
+          <details class="year-card">
+            <summary><span class="year-number">YEAR 02</span><h3>2nd Year</h3><p>Semester 3 &amp; 4</p></summary>
+            <div class="year-content"><div class="semester-grid">
+              <details class="semester-card"><summary>3rd Semester</summary><p>Choose your branch</p><div class="branch-grid">
+                <div class="branch-choice"><span class="branch-code">CSE</span><div class="branch-links"><a href="/notes?branch=CSE&amp;year=2&amp;semester=3">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CSE&amp;year=2&amp;semester=3">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">IT</span><div class="branch-links"><a href="/notes?branch=IT&amp;year=2&amp;semester=3">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=IT&amp;year=2&amp;semester=3">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ECE</span><div class="branch-links"><a href="/notes?branch=ECE&amp;year=2&amp;semester=3">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ECE&amp;year=2&amp;semester=3">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">EE</span><div class="branch-links"><a href="/notes?branch=EE&amp;year=2&amp;semester=3">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=EE&amp;year=2&amp;semester=3">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ME</span><div class="branch-links"><a href="/notes?branch=ME&amp;year=2&amp;semester=3">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ME&amp;year=2&amp;semester=3">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">CE</span><div class="branch-links"><a href="/notes?branch=CE&amp;year=2&amp;semester=3">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CE&amp;year=2&amp;semester=3">PYQs</a></div></div>
+              </div></details>
+              <details class="semester-card"><summary>4th Semester</summary><p>Choose your branch</p><div class="branch-grid">
+                <div class="branch-choice"><span class="branch-code">CSE</span><div class="branch-links"><a href="/notes?branch=CSE&amp;year=2&amp;semester=4">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CSE&amp;year=2&amp;semester=4">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">IT</span><div class="branch-links"><a href="/notes?branch=IT&amp;year=2&amp;semester=4">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=IT&amp;year=2&amp;semester=4">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ECE</span><div class="branch-links"><a href="/notes?branch=ECE&amp;year=2&amp;semester=4">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ECE&amp;year=2&amp;semester=4">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">EE</span><div class="branch-links"><a href="/notes?branch=EE&amp;year=2&amp;semester=4">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=EE&amp;year=2&amp;semester=4">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ME</span><div class="branch-links"><a href="/notes?branch=ME&amp;year=2&amp;semester=4">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ME&amp;year=2&amp;semester=4">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">CE</span><div class="branch-links"><a href="/notes?branch=CE&amp;year=2&amp;semester=4">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CE&amp;year=2&amp;semester=4">PYQs</a></div></div>
+              </div></details>
+            </div></div>
+          </details>
+
+          <!-- YEAR 3 -->
+          <details class="year-card">
+            <summary><span class="year-number">YEAR 03</span><h3>3rd Year</h3><p>Semester 5 &amp; 6</p></summary>
+            <div class="year-content"><div class="semester-grid">
+              <details class="semester-card"><summary>5th Semester</summary><p>Choose your branch</p><div class="branch-grid">
+                <div class="branch-choice"><span class="branch-code">CSE</span><div class="branch-links"><a href="/notes?branch=CSE&amp;year=3&amp;semester=5">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CSE&amp;year=3&amp;semester=5">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">IT</span><div class="branch-links"><a href="/notes?branch=IT&amp;year=3&amp;semester=5">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=IT&amp;year=3&amp;semester=5">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ECE</span><div class="branch-links"><a href="/notes?branch=ECE&amp;year=3&amp;semester=5">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ECE&amp;year=3&amp;semester=5">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">EE</span><div class="branch-links"><a href="/notes?branch=EE&amp;year=3&amp;semester=5">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=EE&amp;year=3&amp;semester=5">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ME</span><div class="branch-links"><a href="/notes?branch=ME&amp;year=3&amp;semester=5">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ME&amp;year=3&amp;semester=5">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">CE</span><div class="branch-links"><a href="/notes?branch=CE&amp;year=3&amp;semester=5">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CE&amp;year=3&amp;semester=5">PYQs</a></div></div>
+              </div></details>
+              <details class="semester-card"><summary>6th Semester</summary><p>Choose your branch</p><div class="branch-grid">
+                <div class="branch-choice"><span class="branch-code">CSE</span><div class="branch-links"><a href="/notes?branch=CSE&amp;year=3&amp;semester=6">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CSE&amp;year=3&amp;semester=6">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">IT</span><div class="branch-links"><a href="/notes?branch=IT&amp;year=3&amp;semester=6">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=IT&amp;year=3&amp;semester=6">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ECE</span><div class="branch-links"><a href="/notes?branch=ECE&amp;year=3&amp;semester=6">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ECE&amp;year=3&amp;semester=6">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">EE</span><div class="branch-links"><a href="/notes?branch=EE&amp;year=3&amp;semester=6">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=EE&amp;year=3&amp;semester=6">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ME</span><div class="branch-links"><a href="/notes?branch=ME&amp;year=3&amp;semester=6">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ME&amp;year=3&amp;semester=6">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">CE</span><div class="branch-links"><a href="/notes?branch=CE&amp;year=3&amp;semester=6">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CE&amp;year=3&amp;semester=6">PYQs</a></div></div>
+              </div></details>
+            </div></div>
+          </details>
+
+          <!-- YEAR 4 -->
+          <details class="year-card">
+            <summary><span class="year-number">YEAR 04</span><h3>4th Year</h3><p>Semester 7 &amp; 8</p></summary>
+            <div class="year-content"><div class="semester-grid">
+              <details class="semester-card"><summary>7th Semester</summary><p>Choose your branch</p><div class="branch-grid">
+                <div class="branch-choice"><span class="branch-code">CSE</span><div class="branch-links"><a href="/notes?branch=CSE&amp;year=4&amp;semester=7">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CSE&amp;year=4&amp;semester=7">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">IT</span><div class="branch-links"><a href="/notes?branch=IT&amp;year=4&amp;semester=7">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=IT&amp;year=4&amp;semester=7">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ECE</span><div class="branch-links"><a href="/notes?branch=ECE&amp;year=4&amp;semester=7">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ECE&amp;year=4&amp;semester=7">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">EE</span><div class="branch-links"><a href="/notes?branch=EE&amp;year=4&amp;semester=7">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=EE&amp;year=4&amp;semester=7">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ME</span><div class="branch-links"><a href="/notes?branch=ME&amp;year=4&amp;semester=7">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ME&amp;year=4&amp;semester=7">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">CE</span><div class="branch-links"><a href="/notes?branch=CE&amp;year=4&amp;semester=7">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CE&amp;year=4&amp;semester=7">PYQs</a></div></div>
+              </div></details>
+              <details class="semester-card"><summary>8th Semester</summary><p>Choose your branch</p><div class="branch-grid">
+                <div class="branch-choice"><span class="branch-code">CSE</span><div class="branch-links"><a href="/notes?branch=CSE&amp;year=4&amp;semester=8">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CSE&amp;year=4&amp;semester=8">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">IT</span><div class="branch-links"><a href="/notes?branch=IT&amp;year=4&amp;semester=8">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=IT&amp;year=4&amp;semester=8">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ECE</span><div class="branch-links"><a href="/notes?branch=ECE&amp;year=4&amp;semester=8">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ECE&amp;year=4&amp;semester=8">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">EE</span><div class="branch-links"><a href="/notes?branch=EE&amp;year=4&amp;semester=8">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=EE&amp;year=4&amp;semester=8">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">ME</span><div class="branch-links"><a href="/notes?branch=ME&amp;year=4&amp;semester=8">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=ME&amp;year=4&amp;semester=8">PYQs</a></div></div>
+                <div class="branch-choice"><span class="branch-code">CE</span><div class="branch-links"><a href="/notes?branch=CE&amp;year=4&amp;semester=8">Notes</a><a class="pyq-link" href="/pages/pyqs.html?branch=CE&amp;year=4&amp;semester=8">PYQs</a></div></div>
+              </div></details>
+            </div></div>
+          </details>
+        </div>
+        <div class="home-notice"><strong>Content status:</strong> Study resources are added after verification. Please verify papers before treating them as official university question papers.</div>
+      </div>
+    </section>
+
+    <section class="home-section" style="background:#fff">
+      <div class="container">
+        <h2 class="section-heading home-section-heading">Notes &amp; Previous Year Papers</h2>
+        <p class="section-description home-section-description">Browse all available study material.</p>
+        <div class="resource-grid">
+          <article class="resource-card"><div class="card-icon" aria-hidden="true">📚</div><h3>Semester-wise Notes</h3><p>Explore subject notes and unit-wise study materials.</p><a class="button" href="/pages/notes.html">Explore Notes</a></article>
+          <article class="resource-card"><div class="card-icon" aria-hidden="true">📄</div><h3>Previous Year Question Papers</h3><p>Search available exam papers by year, semester and subject.</p><a class="button" href="/pages/pyqs.html">Explore PYQs</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section">
+      <div class="container content-narrow text-center">
+        <h2 class="section-heading">Study Smarter, Semester by Semester</h2>
+        <p class="section-description">A centralized place to organize engineering study resources and exam preparation materials.</p>
+        <a class="button" href="/pages/login.html">Student Login</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- SAME SHARED FOOTER: layout.js loads the existing footer here -->
+  <div id="footer-placeholder"></div>
+</body>
+</html>
